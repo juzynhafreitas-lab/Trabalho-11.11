@@ -1,0 +1,837 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NEXPLAY - Filmes e Séries</title>
+
+    <style>
+
+        /* CONFIGURAÇÕES GERAIS */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #080808;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        /* CABEÇALHO */
+
+        .topo {
+            background-color: #111;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            border-bottom: 3px solid #1687e8;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .logo span {
+            color: #1687e8;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff922b;
+        }
+
+        .btn-cadastro {
+            background-color: #1687e8;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .btn-cadastro:hover {
+            background-color: #ff922b;
+            color: #080808;
+        }
+
+        /* BANNER PRINCIPAL */
+
+        .banner {
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            padding: 60px 7%;
+
+            background:
+                linear-gradient(
+                    to right,
+                    rgba(0,0,0,0.95),
+                    rgba(0,0,0,0.55),
+                    rgba(0,0,0,0.1)
+                ),
+                url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1800")
+                center/cover no-repeat;
+        }
+
+        .banner-conteudo {
+            max-width: 600px;
+        }
+
+        .destaque {
+            display: inline-block;
+            background-color: #ff922b;
+            color: #080808;
+            padding: 9px 16px;
+            border-radius: 5px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .banner h1 {
+            font-size: 48px;
+            margin: 25px 0 15px;
+        }
+
+        .banner p {
+            color: #ddd;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .botao {
+            display: inline-block;
+            background-color: #1687e8;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 7px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .botao:hover {
+            background-color: #ff922b;
+            color: #080808;
+            transform: scale(1.05);
+        }
+
+        /* LANÇAMENTOS */
+
+        .catalogo {
+            padding: 50px 5%;
+        }
+
+        .catalogo h3,
+        .series h3 {
+            font-size: 28px;
+            border-left: 5px solid #1687e8;
+            padding-left: 12px;
+            margin-bottom: 12px;
+        }
+
+        .descricao {
+            color: #aaa;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* CARDS DOS FILMES */
+
+        .filmes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .filme {
+            background-color: #171717;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #303030;
+            transition: 0.3s;
+        }
+
+        .filme:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 5px 20px rgba(22,135,232,0.3);
+        }
+
+        .filme img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .filme-info {
+            padding: 20px;
+        }
+
+        .filme-info h4 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .genero {
+            color: #ff922b;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .filme-info p {
+            color: #bbb;
+            line-height: 1.6;
+            font-size: 14px;
+            margin-top: 12px;
+        }
+
+        .avaliacao {
+            display: block;
+            color: #1687e8;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        /* SÉRIES */
+
+        .series {
+            padding: 40px 5%;
+        }
+
+        .series-conteudo {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .serie-card {
+            background-color: #171717;
+            border: 1px solid #303030;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .serie-card:hover {
+            transform: translateY(-5px);
+            border-color: #1687e8;
+        }
+
+        .serie-card img {
+            width: 100%;
+            height: 270px;
+            object-fit: cover;
+        }
+
+        .serie-info {
+            padding: 20px;
+        }
+
+        .serie-info h4 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .serie-info p {
+            color: #bbb;
+            line-height: 1.6;
+        }
+
+        /* SOBRE */
+
+        .sobre {
+            background-color: #141414;
+            padding: 55px 8%;
+            text-align: center;
+            margin-top: 30px;
+            border-top: 2px solid #1687e8;
+        }
+
+        .sobre h3 {
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .sobre h3 span {
+            color: #ff922b;
+        }
+
+        .sobre p {
+            color: #ccc;
+            line-height: 1.8;
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .vantagens {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .vantagens li {
+            background-color: #222;
+            padding: 17px 22px;
+            border-radius: 8px;
+            border-bottom: 3px solid #ff922b;
+        }
+
+        /* CHAMADA PARA CADASTRO */
+
+        .chamada {
+            margin: 45px 5%;
+            padding: 55px 25px;
+            text-align: center;
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    rgba(0,0,0,0.8),
+                    rgba(0,0,0,0.85)
+                ),
+                url("https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=1400")
+                center/cover;
+        }
+
+        .chamada h3 {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .chamada h3 span {
+            color: #ff922b;
+        }
+
+        .chamada p {
+            color: #ddd;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        /* RODAPÉ */
+
+        footer {
+            background-color: #111;
+            text-align: center;
+            padding: 35px 20px;
+            border-top: 3px solid #1687e8;
+        }
+
+        footer .logo {
+            margin-bottom: 15px;
+        }
+
+        footer p {
+            color: #999;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        footer span {
+            color: #ff922b;
+        }
+
+        /* RESPONSIVIDADE */
+
+        @media (max-width: 850px) {
+
+            .filmes {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .banner h1 {
+                font-size: 38px;
+            }
+
+            .topo {
+                justify-content: center;
+            }
+
+            nav ul {
+                justify-content: center;
+            }
+
+        }
+
+        @media (max-width: 550px) {
+
+            .filmes,
+            .series-conteudo {
+                grid-template-columns: 1fr;
+            }
+
+            .banner {
+                min-height: 400px;
+                padding: 35px 6%;
+            }
+
+            .banner h1 {
+                font-size: 32px;
+            }
+
+            .banner p {
+                font-size: 15px;
+            }
+
+            nav ul {
+                gap: 15px;
+                justify-content: center;
+            }
+
+            .catalogo h3,
+            .series h3 {
+                font-size: 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- CABEÇALHO -->
+
+    <header class="topo">
+
+        <h2 class="logo">
+            NEX<span>PLAY</span>
+        </h2>
+
+        <nav>
+
+            <ul>
+
+                <li>
+                    <a href="index.html">Início</a>
+                </li>
+
+                <li>
+                    <a href="#recomendados">Lançamentos</a>
+                </li>
+
+                <li>
+                    <a href="#series">Séries</a>
+                </li>
+
+                <li>
+                    <a href="#sobre">Sobre</a>
+                </li>
+
+                <li>
+                    <a href="cadastro.html" class="btn-cadastro">
+                        Teste Grátis
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <!-- BANNER PRINCIPAL -->
+
+        <section class="banner">
+
+            <div class="banner-conteudo">
+
+                <span class="destaque">
+                    NOVIDADES E LANÇAMENTOS 2026
+                </span>
+
+                <h1>
+                    Seu próximo filme favorito está aqui!
+                </h1>
+
+                <p>
+                    Descubra histórias incríveis, grandes aventuras,
+                    filmes de sucesso e séries que vão prender sua atenção.
+                    Seu entretenimento começa aqui!
+                </p>
+
+                <a href="#recomendados" class="botao">
+                    Explorar catálogo
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- CATÁLOGO DE FILMES -->
+
+        <section id="recomendados" class="catalogo">
+
+            <h3>🎬 Lançamentos e filmes em destaque</h3>
+
+            <p class="descricao">
+                Confira nossa seleção de filmes para você.
+            </p>
+
+            <div class="filmes">
+
+
+                <!-- FILME 1 -->
+
+                <article class="filme">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1534447677768-be436bb09401?w=700"
+                        alt="Céu estrelado e universo representando ficção científica">
+
+                    <div class="filme-info">
+
+                        <h4>Godzilla Minus Zero</h4>
+
+                        <span class="genero">
+                            Ação / Ficção Científica
+                        </span>
+
+                        <p>
+                            O lendário monstro retorna em uma nova
+                            aventura repleta de ação e destruição.
+                        </p>
+
+                        <span class="avaliacao">
+                            ★ Destaque 2026
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- FILME 2 -->
+
+                <article class="filme">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1527224857830-43a7acc85260?w=700"
+                        alt="Sala de cinema representando uma produção de comédia">
+
+                    <div class="filme-info">
+
+                        <h4>Os Farofeiros 3</h4>
+
+                        <span class="genero">
+                            Comédia Nacional
+                        </span>
+
+                        <p>
+                            Uma viagem entre amigos que promete
+                            muita diversão, confusão e boas risadas.
+                        </p>
+
+                        <span class="avaliacao">
+                            ★ Destaque 2026
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- FILME 3 -->
+
+                <article class="filme">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=700"
+                        alt="Céu noturno representando uma aventura de ficção">
+
+                    <div class="filme-info">
+
+                        <h4>Jogos Vorazes: Amanhecer na Colheita</h4>
+
+                        <span class="genero">
+                            Ação / Aventura
+                        </span>
+
+                        <p>
+                            Uma nova história do universo de Jogos
+                            Vorazes, cheia de desafios e emoções.
+                        </p>
+
+                        <span class="avaliacao">
+                            ★ Destaque 2026
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- FILME 4 -->
+
+                <article class="filme">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=700"
+                        alt="Tela de cinema durante uma exibição de filme">
+
+                    <div class="filme-info">
+
+                        <h4>Eu Sou o Rocky</h4>
+
+                        <span class="genero">
+                            Drama / Biografia
+                        </span>
+
+                        <p>
+                            Uma história inspiradora sobre superação,
+                            determinação e a criação de um clássico.
+                        </p>
+
+                        <span class="avaliacao">
+                            ★ Destaque 2026
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- FILME 5 -->
+
+                <article class="filme">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=700"
+                        alt="Paisagem fantástica com montanhas">
+
+                    <div class="filme-info">
+
+                        <h4>Enfeitiçadas</h4>
+
+                        <span class="genero">
+                            Animação / Fantasia
+                        </span>
+
+                        <p>
+                            Uma aventura mágica em um universo
+                            cheio de mistérios e encantamentos.
+                        </p>
+
+                        <span class="avaliacao">
+                            ★ Destaque 2026
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- FILME 6 -->
+
+                <article class="filme">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=700"
+                        alt="Câmera profissional utilizada em uma filmagem">
+
+                    <div class="filme-info">
+
+                        <h4>Entrando Numa Grande Fria</h4>
+
+                        <span class="genero">
+                            Comédia
+                        </span>
+
+                        <p>
+                            Uma história divertida com situações
+                            inesperadas e muitas confusões.
+                        </p>
+
+                        <span class="avaliacao">
+                            ★ Destaque 2026
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- SÉRIES -->
+
+        <section id="series" class="series">
+
+            <h3>📺 Séries em destaque</h3>
+
+            <p class="descricao">
+                Escolha sua próxima série favorita e prepare-se
+                para maratonar!
+            </p>
+
+            <div class="series-conteudo">
+
+
+                <article class="serie-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900"
+                        alt="Castelo em uma paisagem de fantasia">
+
+                    <div class="serie-info">
+
+                        <h4>O Reino Perdido</h4>
+
+                        <p>
+                            Fantasia, mistério e grandes aventuras
+                            em um mundo cheio de segredos.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <article class="serie-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900"
+                        alt="Planeta Terra visto do espaço">
+
+                    <div class="serie-info">
+
+                        <h4>Entre Galáxias</h4>
+
+                        <p>
+                            Uma viagem pelo espaço e pelos
+                            mistérios do universo.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- SOBRE A PLATAFORMA -->
+
+        <section id="sobre" class="sobre">
+
+            <h3>
+                Por que escolher a <span>NEXPLAY?</span>
+            </h3>
+
+            <p>
+                A NEXPLAY é uma plataforma fictícia de streaming
+                desenvolvida para oferecer uma experiência moderna
+                de entretenimento. Nosso objetivo é reunir filmes,
+                lançamentos, séries e recomendações em um único lugar,
+                com uma navegação simples e intuitiva.
+            </p>
+
+            <ul class="vantagens">
+
+                <li>🎬 Filmes e lançamentos</li>
+
+                <li>📺 Séries incríveis</li>
+
+                <li>⭐ Recomendações especiais</li>
+
+                <li>🚀 Interface moderna</li>
+
+                <li>🍿 Entretenimento para todos</li>
+
+            </ul>
+
+        </section>
+
+
+        <!-- CHAMADA PARA CADASTRO -->
+
+        <section class="chamada">
+
+            <h3>
+                Entre para o mundo <span>NEXPLAY!</span>
+            </h3>
+
+            <p>
+                Faça seu cadastro e descubra um universo
+                de filmes e séries.
+            </p>
+
+            <a href="cadastro.html" class="botao">
+                Quero meus 30 dias grátis
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- RODAPÉ -->
+
+    <footer>
+
+        <h2 class="logo">
+            NEX<span>PLAY</span>
+        </h2>
+
+        <p>
+            &copy; 2026 NEXPLAY. Todos os direitos reservados.
+        </p>
+
+        <p>
+            Seu entretenimento começa aqui!
+        </p>
+
+    </footer>
+
+</body>
+
+</html>
+
+
+
+

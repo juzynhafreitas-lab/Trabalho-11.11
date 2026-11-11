@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cadastro - NEXPLAY</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #080808;
+            color: white;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #111;
+            padding: 22px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #1687e8;
+        }
+
+        .logo {
+            color: #1687e8;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #ff922b;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 550px;
+            margin: 45px auto;
+            background: #171717;
+            padding: 35px;
+            border-radius: 12px;
+            border: 1px solid #303030;
+            box-shadow: 0 5px 25px rgba(22, 135, 232, 0.15);
+        }
+
+        .container h1 {
+            text-align: center;
+            color: #1687e8;
+            margin-bottom: 10px;
+        }
+
+        .descricao {
+            text-align: center;
+            color: #ccc;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            margin-top: 17px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 13px;
+            background: #080808;
+            color: white;
+            border: 1px solid #444;
+            border-radius: 6px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        input:focus, select:focus {
+            border-color: #1687e8;
+        }
+
+        input[type="checkbox"] {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        .termos {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            margin-top: 22px;
+            color: #ccc;
+        }
+
+        .termos label {
+            margin: 0;
+            font-weight: normal;
+        }
+
+        .termos a {
+            color: #ff922b;
+            text-decoration: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 25px;
+            background: #1687e8;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #ff922b;
+        }
+
+        .voltar {
+            text-align: center;
+            margin-top: 22px;
+        }
+
+        .voltar a {
+            color: #1687e8;
+            text-decoration: none;
+        }
+
+        .voltar a:hover {
+            color: #ff922b;
+        }
+
+        footer {
+            background: #050505;
+            text-align: center;
+            padding: 22px;
+            color: #aaa;
+            border-top: 2px solid #1687e8;
+        }
+
+        @media (max-width: 500px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .container {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">NEXPLAY</div>
+
+        <nav>
+            <a href="index.html">Voltar ao início</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <div class="container">
+
+            <h1>Crie sua conta!</h1>
+
+            <p class="descricao">
+                Faça seu cadastro e venha conhecer o universo NEXPLAY.
+            </p>
+
+            <form id="formCadastro">
+
+                <label for="nome">Nome completo:</label>
+                <input type="text" id="nome" name="nome"
+                       placeholder="Digite seu nome completo" required>
+
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email"
+                       placeholder="Digite seu e-mail" required>
+
+                <label for="telefone">Telefone:</label>
+                <input type="tel" id="telefone" name="telefone"
+                       placeholder="(00) 00000-0000" required>
+
+                <label for="nascimento">Data de nascimento:</label>
+                <input type="date" id="nascimento" name="nascimento" required>
+
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha"
+                       placeholder="Crie uma senha" minlength="6" required>
+
+                <label for="confirmarSenha">Confirmar senha:</label>
+                <input type="password" id="confirmarSenha"
+                       placeholder="Digite a senha novamente" required>
+
+                <label for="plano">Escolha seu plano:</label>
+                <select id="plano" name="plano" required>
+                    <option value="">Selecione uma opção</option>
+                    <option value="gratuito">Teste grátis</option>
+                    <option value="basico">Plano Básico</option>
+                    <option value="premium">Plano Premium</option>
+                </select>
+
+                <div class="termos">
+                    <input type="checkbox" id="termos" required>
+                    <label for="termos">
+                        Aceito os termos de uso e a política de privacidade.
+                    </label>
+                </div>
+
+                <button type="submit">Finalizar cadastro</button>
+
+            </form>
+
+            <p class="voltar">
+                Já possui uma conta?
+                <a href="index.html">Voltar para o início</a>
+            </p>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>NEXPLAY © 2026 - Todos os direitos reservados.</p>
+        <p>Projeto acadêmico de desenvolvimento web.</p>
+    </footer>
+
+    <script>
+        const formulario = document.getElementById("formCadastro");
+
+        formulario.addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const senha = document.getElementById("senha").value;
+            const confirmarSenha = document.getElementById("confirmarSenha").value;
+
+            if (senha !== confirmarSenha) {
+                alert("As senhas não são iguais. Verifique!");
+                return;
+            }
+
+            alert("Cadastro realizado com sucesso! Bem-vindo à NEXPLAY!");
+
+            formulario.reset();
+
+        });
+    </script>
+
+</body>
+</html>
+
+
